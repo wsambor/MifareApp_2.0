@@ -1,0 +1,92 @@
+﻿<Window x:Class="MifareApp_2._0.View.InitializeCardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MifareApp_2._0.View"
+        mc:Ignorable="d"
+        DataContext="{Binding Path=InitializeCard, Source={StaticResource Locator}}"
+        Background="{StaticResource BackgroundKey}"
+        Title="Exam presence"         
+        Height="360" Width="850"        
+        MinHeight="360" MinWidth="850"
+        MaxHeight="360" MaxWidth="850">
+
+    <Window.Resources>
+        <Style TargetType="Menu">
+            <Setter Property="Background" Value="{StaticResource BackgroundKey}" />
+            <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+            <Setter Property="FontSize" Value="13.333" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="485*"/>
+            <ColumnDefinition Width="217*"/>
+            <ColumnDefinition Width="70*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="1" Content="Exam Presence" Margin="5,5,5,5" HorizontalAlignment="Left" FontSize="40" Foreground="{StaticResource AppNameFontColor}" FontFamily="Arial" FontWeight="Bold"/>
+
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Connection" Margin="0,10,0,0" Grid.ColumnSpan="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+
+                <Label Grid.Row="0" Grid.Column="0" Content="Card reader:" Margin="5,5,5,5"/>
+                <ComboBox Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" ItemsSource="{Binding Readers}"  DisplayMemberPath="Name" SelectedValue="{Binding Path=SelectedReader, Mode=TwoWay}" />
+
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Key A:" Margin="5,5,5,5"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=KeyA}"  MaxLength="12" Margin="5,5,5,5"/>
+                <Button Grid.Row="1" Grid.Column="2" Content="Start" Margin="5,5,5,5" Command="{Binding StartCommand}">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource MultiBinding}">
+                            <Binding Path="IsStarted"/>
+                            <Binding Path="IsConnected"/>
+                            <Binding Path="SelectedReader.Name"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
+
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2" Grid.Column="1" Header="Student ID Card" Margin="0,10,0,0" IsEnabled="{Binding IsConnected, Mode=TwoWay}" Grid.ColumnSpan="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+
+                <Label Grid.Row="0" Grid.Column="0" Content="ID Number:" Margin="5,5,5,5"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=IDNumberContent}" IsReadOnly="True" MaxLength="12" Margin="5,5,5,5"/>
+
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>

@@ -1,0 +1,31 @@
+﻿<Application x:Class="MifareApp_2._0.App" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:local="clr-namespace:MifareApp_2._0"  
+             xmlns:c="clr-namespace:MifareApp_2._0.Converters"  
+             StartupUri="View/InitializeCardWindow.xaml" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             d1p1:Ignorable="d" 
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/MetroDark/MetroDark.MSControls.Core.Implicit.xaml"/>
+                <ResourceDictionary Source="Themes/MetroDark/MetroDark.MSControls.Toolkit.Implicit.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <SolidColorBrush x:Key="BackgroundKey" Color="#FF181818" />
+            <SolidColorBrush x:Key="AppNameFontColor" Color="#FF00AADE" />
+
+            <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:MifareApp_2._0.ViewModel" />
+
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <c:ObjectToBooleanConverter x:Key="ObjectToBool"/>
+            <c:InverseBooleanConverter x:Key="InverseBool"/>
+            <c:MultibindingConverter x:Key="MultiBinding"/>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
