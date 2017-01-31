@@ -165,7 +165,7 @@ namespace MifareApp_2._0.Model
         {
             string idValue = "";
             
-            for (int i = 3; i <= 11; i += 2)
+            for (int i = 9; i <= 17; i += 2)
             {
                 idValue += wholeBlockContent[i];
             }

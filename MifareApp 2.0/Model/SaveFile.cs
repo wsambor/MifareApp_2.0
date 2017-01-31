@@ -9,17 +9,21 @@ namespace MifareApp_2._0.Model
 {
     class SaveFile
     {
-        public static string LastOneSaved = "";
+        public static DateTime ThisDay = DateTime.Now;
+        public static string LastOneSaved;
+        public static string FileName;
 
         public static void SaveToFile(string IDvalue)
         {
-            DateTime thisDay = DateTime.Today;
-            string fileName = (thisDay.ToString("u")).Substring(0, 10) + "_ExamPresence.txt";
+            if (String.IsNullOrEmpty(FileName))
+            {
+                FileName = ThisDay.ToString("yyyy-MM-dd_HH-mm") + Constants.FILE_NAME_SUFFIX;
+            }
 
             if (!String.Equals(LastOneSaved, IDvalue))
             {
                 LastOneSaved = IDvalue;
-                File.AppendAllText(fileName, IDvalue + Environment.NewLine);
+                File.AppendAllText(FileName, IDvalue + Environment.NewLine);
             }
         }
     }
